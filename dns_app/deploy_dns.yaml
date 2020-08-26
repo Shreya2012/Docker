@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dnsdeploy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dnsdeploy
+  template:
+    metadata:
+      labels:
+        app: dnsdeploy
+    spec:
+      containers:
+      - name: us
+        image: shreya2012/us
+      - name: as
+        image: shreya2012/as
+      - name: fs
+        image: shreya2012/fs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dnsservice
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: dnsdeploy
+  ports:
+  - port: 8080
+    name: us
+    targetPort: 8080
+    nodePort: 30003
+    protocol: TCP
+  - port: 9090
+    name: fs
+    targetPort: 9090
+    nodePort: 30002
+    protocol: TCP
+  - port: 53533
+    name: as
+    targetPort: 53533
+    nodePort: 30001
+    protocol: UDP

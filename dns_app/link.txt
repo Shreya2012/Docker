@@ -1,0 +1,11 @@
+http://50.23.1.35:30002/register
+
+{
+"hostname": "fibonacci.com",
+"ip": "50.23.1.35",
+"as_ip": "50.23.1.35",
+"as_port":"30001"
+}
+
+
+http://50.23.1.35:30003/fibonacci?hostname=fibonacci.com&fs_port=30002&number=10&as_ip=50.23.1.35&as_port=30001
